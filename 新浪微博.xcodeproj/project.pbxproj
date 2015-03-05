@@ -126,7 +126,7 @@
 				576E41C21AA833C800BD2D1D /* View */,
 			);
 			name = "Main(主要)";
-			path = Main;
+			path = "Main(主要）";
 			sourceTree = "<group>";
 		};
 		576E41C11AA833C800BD2D1D /* Model */ = {
@@ -150,8 +150,7 @@
 				576E419B1AA7FAC700BD2D1D /* AppDelegate.m */,
 				576E41981AA7FAC700BD2D1D /* main.m */,
 			);
-			name = Other;
-			path = "新浪微博/Classes/Main(主要）/Other";
+			path = Other;
 			sourceTree = "<group>";
 		};
 		576E41C71AA836EA00BD2D1D /* Controller */ = {
