@@ -96,7 +96,7 @@
     SWCommonGroup *group = [SWCommonGroup group];
     [self.groups addObject:group];
     
-    // 2.设置组的所有行数据
+    // 2.设置组的所有行数据:根据不同cell下那是不同内容
     SWCommonItem *gameCenter = [SWCommonItem itemWithTitle:@"游戏中心" icon:@"game_center"];
     
     SWCommonLabelItem *near = [SWCommonLabelItem itemWithTitle:@"周边" icon:@"near"];
