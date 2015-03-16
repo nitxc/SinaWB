@@ -384,7 +384,6 @@
 		578B16C91AB48D2800BCDF60 /* SWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D18EC11AA9E3F2002D3C94 /* SWSearchBar.m */; };
 		578B16CB1AB48D2800BCDF60 /* SWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 574F54FA1AA859F100BFB4C3 /* SWDiscoverViewController.m */; };
 		578B16CD1AB48D2800BCDF60 /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 574F550E1AA859FB00BFB4C3 /* SWProfileViewController.m */; };
-		578B16CF1AB48D2800BCDF60 /* SWSystemSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796FA6B1AA986D500B0D563 /* SWSystemSettingController.m */; };
 		578B16D21AB48D2800BCDF60 /* SWBaseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C371591AAE9E6D00F7CF84 /* SWBaseTool.m */; };
 		578B16D41AB48D2800BCDF60 /* SWStatusTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C371531AAE9E4800F7CF84 /* SWStatusTool.m */; };
 		578B16D61AB48D2800BCDF60 /* SWUserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C371551AAE9E4800F7CF84 /* SWUserTool.m */; };
@@ -458,7 +457,6 @@
 		578B17631AB48D2900BCDF60 /* SWUserInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C371711AAED73300F7CF84 /* SWUserInfoResult.m */; };
 		578B17651AB48D2900BCDF60 /* SWBaseParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C3717B1AAED78D00F7CF84 /* SWBaseParam.m */; };
 		578B17671AB48D2900BCDF60 /* SWTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D18ECA1AAB08E6002D3C94 /* SWTabBar.m */; };
-		5796FA6E1AA986D500B0D563 /* SWSystemSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5796FA6C1AA986D500B0D563 /* SWSystemSettingController.xib */; };
 		57BA16771AADADC400A4C0E6 /* SWLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57BA16751AADADC400A4C0E6 /* SWLoadMoreFooter.xib */; };
 		57BC18741AB668EE0064C1B7 /* SWLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC18731AB668EE0064C1B7 /* SWLink.m */; };
 		57BC18801AB675A40064C1B7 /* SWCommonArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC18771AB675A40064C1B7 /* SWCommonArrowItem.m */; };
@@ -476,6 +474,14 @@
 		57D476551AB3489F0099BB9F /* d_duixiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D476541AB3489F0099BB9F /* d_duixiang@2x.png */; };
 		57D476571AB348AE0099BB9F /* d_travel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D476561AB348AD0099BB9F /* d_travel@2x.png */; };
 		57D476591AB348C00099BB9F /* d_fahongbao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D476581AB348C00099BB9F /* d_fahongbao@2x.png */; };
+		57E6AC681AB6BA2700D5BF92 /* SWCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC671AB6BA2700D5BF92 /* SWCommonViewController.m */; };
+		57E6AC6D1AB6BF7B00D5BF92 /* SWOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC6B1AB6BF7B00D5BF92 /* SWOneViewController.m */; };
+		57E6AC6E1AB6BF7B00D5BF92 /* SWOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57E6AC6C1AB6BF7B00D5BF92 /* SWOneViewController.xib */; };
+		57E6AC741AB6BFC200D5BF92 /* SWThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC701AB6BFC200D5BF92 /* SWThreeViewController.m */; };
+		57E6AC751AB6BFC200D5BF92 /* SWTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC721AB6BFC200D5BF92 /* SWTwoViewController.m */; };
+		57E6AC761AB6BFC200D5BF92 /* SWTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57E6AC731AB6BFC200D5BF92 /* SWTwoViewController.xib */; };
+		57E6AC791AB6C45E00D5BF92 /* SWSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC781AB6C45E00D5BF92 /* SWSettingViewController.m */; };
+		57E6AC7C1AB6C46500D5BF92 /* SWGeneralSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E6AC7B1AB6C46500D5BF92 /* SWGeneralSettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -894,9 +900,6 @@
 		578F80D11AAFEB1100713F89 /* SWStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWStatusToolbar.m; sourceTree = "<group>"; };
 		5796FA621AA9585200B0D563 /* SWFriendsAttentionDynamicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFriendsAttentionDynamicController.h; sourceTree = "<group>"; };
 		5796FA631AA9585200B0D563 /* SWFriendsAttentionDynamicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWFriendsAttentionDynamicController.m; sourceTree = "<group>"; };
-		5796FA6A1AA986D500B0D563 /* SWSystemSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSystemSettingController.h; sourceTree = "<group>"; };
-		5796FA6B1AA986D500B0D563 /* SWSystemSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSystemSettingController.m; sourceTree = "<group>"; };
-		5796FA6C1AA986D500B0D563 /* SWSystemSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWSystemSettingController.xib; sourceTree = "<group>"; };
 		5796FA721AA98D3700B0D563 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		5796FA731AA98D3700B0D563 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		579E7C3E1AB172850005351F /* SWStatusPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWStatusPhotosView.h; sourceTree = "<group>"; };
@@ -1090,6 +1093,20 @@
 		57D476541AB3489F0099BB9F /* d_duixiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d_duixiang@2x.png"; sourceTree = "<group>"; };
 		57D476561AB348AD0099BB9F /* d_travel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d_travel@2x.png"; sourceTree = "<group>"; };
 		57D476581AB348C00099BB9F /* d_fahongbao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d_fahongbao@2x.png"; sourceTree = "<group>"; };
+		57E6AC661AB6BA2700D5BF92 /* SWCommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCommonTableViewController.h; sourceTree = "<group>"; };
+		57E6AC671AB6BA2700D5BF92 /* SWCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCommonViewController.m; sourceTree = "<group>"; };
+		57E6AC6A1AB6BF7B00D5BF92 /* SWOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWOneViewController.h; sourceTree = "<group>"; };
+		57E6AC6B1AB6BF7B00D5BF92 /* SWOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWOneViewController.m; sourceTree = "<group>"; };
+		57E6AC6C1AB6BF7B00D5BF92 /* SWOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWOneViewController.xib; sourceTree = "<group>"; };
+		57E6AC6F1AB6BFC200D5BF92 /* SWThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWThreeViewController.h; sourceTree = "<group>"; };
+		57E6AC701AB6BFC200D5BF92 /* SWThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWThreeViewController.m; sourceTree = "<group>"; };
+		57E6AC711AB6BFC200D5BF92 /* SWTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTwoViewController.h; sourceTree = "<group>"; };
+		57E6AC721AB6BFC200D5BF92 /* SWTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTwoViewController.m; sourceTree = "<group>"; };
+		57E6AC731AB6BFC200D5BF92 /* SWTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWTwoViewController.xib; sourceTree = "<group>"; };
+		57E6AC771AB6C45E00D5BF92 /* SWSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSettingViewController.h; sourceTree = "<group>"; };
+		57E6AC781AB6C45E00D5BF92 /* SWSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSettingViewController.m; sourceTree = "<group>"; };
+		57E6AC7A1AB6C46500D5BF92 /* SWGeneralSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGeneralSettingViewController.h; sourceTree = "<group>"; };
+		57E6AC7B1AB6C46500D5BF92 /* SWGeneralSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGeneralSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1656,11 +1673,12 @@
 		574F550C1AA859FB00BFB4C3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				57E6AC7A1AB6C46500D5BF92 /* SWGeneralSettingViewController.h */,
+				57E6AC7B1AB6C46500D5BF92 /* SWGeneralSettingViewController.m */,
+				57E6AC771AB6C45E00D5BF92 /* SWSettingViewController.h */,
+				57E6AC781AB6C45E00D5BF92 /* SWSettingViewController.m */,
 				574F550D1AA859FB00BFB4C3 /* SWProfileViewController.h */,
 				574F550E1AA859FB00BFB4C3 /* SWProfileViewController.m */,
-				5796FA6A1AA986D500B0D563 /* SWSystemSettingController.h */,
-				5796FA6B1AA986D500B0D563 /* SWSystemSettingController.m */,
-				5796FA6C1AA986D500B0D563 /* SWSystemSettingController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1753,6 +1771,7 @@
 		576E41BF1AA833C800BD2D1D /* Main(主要) */ = {
 			isa = PBXGroup;
 			children = (
+				57E6AC691AB6BF7300D5BF92 /* Test */,
 				57BE0CB41AAD3BDE00170074 /* Tool */,
 				57D18ED81AAC989A002D3C94 /* Lib */,
 				574F54F01AA84E0F00BFB4C3 /* Category */,
@@ -1803,6 +1822,8 @@
 		576E41C71AA836EA00BD2D1D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				57E6AC661AB6BA2700D5BF92 /* SWCommonTableViewController.h */,
+				57E6AC671AB6BA2700D5BF92 /* SWCommonViewController.m */,
 				576E41C81AA8370B00BD2D1D /* SWTabBarController.h */,
 				576E41C91AA8370B00BD2D1D /* SWTabBarController.m */,
 				574F54F41AA8583200BFB4C3 /* SWNavigationController.h */,
@@ -2208,6 +2229,21 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		57E6AC691AB6BF7300D5BF92 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				57E6AC6F1AB6BFC200D5BF92 /* SWThreeViewController.h */,
+				57E6AC701AB6BFC200D5BF92 /* SWThreeViewController.m */,
+				57E6AC711AB6BFC200D5BF92 /* SWTwoViewController.h */,
+				57E6AC721AB6BFC200D5BF92 /* SWTwoViewController.m */,
+				57E6AC731AB6BFC200D5BF92 /* SWTwoViewController.xib */,
+				57E6AC6A1AB6BF7B00D5BF92 /* SWOneViewController.h */,
+				57E6AC6B1AB6BF7B00D5BF92 /* SWOneViewController.m */,
+				57E6AC6C1AB6BF7B00D5BF92 /* SWOneViewController.xib */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2512,7 +2548,6 @@
 				570078611AB2CC4800D437C1 /* d_yinxian@2x.png in Resources */,
 				5700793D1AB2CC4800D437C1 /* lxh_zhuanfa@2x.png in Resources */,
 				570078AA1AB2CC4800D437C1 /* o_weibo@3x.png in Resources */,
-				5796FA6E1AA986D500B0D563 /* SWSystemSettingController.xib in Resources */,
 				570077F61AB2CC4800D437C1 /* d_aoteman@2x.png in Resources */,
 				5700781E1AB2CC4800D437C1 /* d_huaxin@2x.png in Resources */,
 				570078341AB2CC4800D437C1 /* d_nanhaier@3x.png in Resources */,
@@ -2526,6 +2561,7 @@
 				570078BE1AB2CC4800D437C1 /* w_xiayu@3x.png in Resources */,
 				570079291AB2CC4800D437C1 /* lxh_xiudada.gif in Resources */,
 				5700792B1AB2CC4800D437C1 /* lxh_xiudada@2x.png in Resources */,
+				57E6AC761AB6BFC200D5BF92 /* SWTwoViewController.xib in Resources */,
 				570078141AB2CC4800D437C1 /* d_haixiu@2x.png in Resources */,
 				570077FF1AB2CC4800D437C1 /* d_bizui@3x.png in Resources */,
 				570078791AB2CC4800D437C1 /* f_meng@2x.png in Resources */,
@@ -2539,6 +2575,7 @@
 				5700780B1AB2CC4800D437C1 /* d_doge@3x.png in Resources */,
 				570078531AB2CC4800D437C1 /* d_tuzi@2x.png in Resources */,
 				570079051AB2CC4800D437C1 /* lxh_oye.png in Resources */,
+				57E6AC6E1AB6BF7B00D5BF92 /* SWOneViewController.xib in Resources */,
 				570077F81AB2CC4800D437C1 /* d_baibai@2x.png in Resources */,
 				5700785F1AB2CC4800D437C1 /* d_xu@2x.png in Resources */,
 				570078ED1AB2CC4800D437C1 /* lxh_jiekexun@2x.png in Resources */,
@@ -2666,6 +2703,7 @@
 				578B16891AB48D2700BCDF60 /* SWEmotionPopView.m in Sources */,
 				578B168C1AB48D2700BCDF60 /* SWEmotionView.m in Sources */,
 				578B168E1AB48D2700BCDF60 /* SWEmotionGridView.m in Sources */,
+				57E6AC791AB6C45E00D5BF92 /* SWSettingViewController.m in Sources */,
 				578B16901AB48D2700BCDF60 /* SWEmotionKeyboard.m in Sources */,
 				578B16921AB48D2700BCDF60 /* SWEmotionListView.m in Sources */,
 				57BC188A1AB677560064C1B7 /* SWBadgeView.m in Sources */,
@@ -2689,11 +2727,14 @@
 				578B16B21AB48D2700BCDF60 /* SWStatusDetailView.m in Sources */,
 				57BC18841AB675A40064C1B7 /* SWCommonSwitchItem.m in Sources */,
 				578B16B41AB48D2700BCDF60 /* SWStatusOriginalView.m in Sources */,
+				57E6AC751AB6BFC200D5BF92 /* SWTwoViewController.m in Sources */,
 				578B16B61AB48D2700BCDF60 /* SWStatusRetweetedView.m in Sources */,
 				578B16B81AB48D2700BCDF60 /* SWStatusToolbar.m in Sources */,
 				578B16BA1AB48D2700BCDF60 /* SWStatusUserHeadView.m in Sources */,
 				578B16BC1AB48D2700BCDF60 /* SWStatusPhotosView.m in Sources */,
+				57E6AC6D1AB6BF7B00D5BF92 /* SWOneViewController.m in Sources */,
 				578B16BE1AB48D2700BCDF60 /* SWStatusPhotoView.m in Sources */,
+				57E6AC7C1AB6C46500D5BF92 /* SWGeneralSettingViewController.m in Sources */,
 				578B16C01AB48D2700BCDF60 /* SWLoadMoreFooter.m in Sources */,
 				578B16C31AB48D2700BCDF60 /* SWPopMenu.m in Sources */,
 				578B16C51AB48D2700BCDF60 /* SWTitleButton.m in Sources */,
@@ -2701,7 +2742,7 @@
 				578B16C91AB48D2800BCDF60 /* SWSearchBar.m in Sources */,
 				578B16CB1AB48D2800BCDF60 /* SWDiscoverViewController.m in Sources */,
 				578B16CD1AB48D2800BCDF60 /* SWProfileViewController.m in Sources */,
-				578B16CF1AB48D2800BCDF60 /* SWSystemSettingController.m in Sources */,
+				57E6AC681AB6BA2700D5BF92 /* SWCommonViewController.m in Sources */,
 				57BC18831AB675A40064C1B7 /* SWCommonLabelItem.m in Sources */,
 				578B16D21AB48D2800BCDF60 /* SWBaseTool.m in Sources */,
 				578B16D41AB48D2800BCDF60 /* SWStatusTool.m in Sources */,
@@ -2778,6 +2819,7 @@
 				578B175F1AB48D2900BCDF60 /* SWSendStatusResult.m in Sources */,
 				578B17611AB48D2900BCDF60 /* SWUserInfoParam.m in Sources */,
 				578B17631AB48D2900BCDF60 /* SWUserInfoResult.m in Sources */,
+				57E6AC741AB6BFC200D5BF92 /* SWThreeViewController.m in Sources */,
 				578B17651AB48D2900BCDF60 /* SWBaseParam.m in Sources */,
 				578B17671AB48D2900BCDF60 /* SWTabBar.m in Sources */,
 				578B16781AB48CB900BCDF60 /* RegexKitLite.m in Sources */,
