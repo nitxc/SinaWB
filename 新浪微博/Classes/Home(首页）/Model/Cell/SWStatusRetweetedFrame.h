@@ -10,7 +10,7 @@
 @class SWStatus;
 @interface SWStatusRetweetedFrame : NSObject
 /** 昵称 */
-@property (nonatomic, assign) CGRect nameFrame;
+//@property (nonatomic, assign) CGRect nameFrame;
 /** 正文 */
 @property (nonatomic, assign) CGRect textFrame;
 /** 转发微博模型 */

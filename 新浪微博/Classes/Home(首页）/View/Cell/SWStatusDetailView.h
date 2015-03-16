@@ -11,5 +11,4 @@
 @interface SWStatusDetailView : UIImageView
 @property (nonatomic, strong) SWStatusDetailFrame *detailFrame;
 
-@property (nonatomic, weak) SWStatusOriginalView *originalView;
 @end

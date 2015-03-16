@@ -1,8 +1,8 @@
 //
 //  HMEmotionListView.h
-//  黑马微博
+//  新浪微博
 //
-//  Created by apple on 14-7-15.
+//  Created by apple on 15-4-15.
 //  Copyright (c) 2014年 heima. All rights reserved.
 //  表情列表（能展示多页表情）
 

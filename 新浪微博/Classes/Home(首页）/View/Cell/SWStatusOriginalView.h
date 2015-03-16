@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 @class SWStatusOriginalView;
-@protocol SWStatusOriginalViewDelegate<NSObject>
 
-- (void)statusOriginalViewDidClickedMoreButton:(SWStatusOriginalView *) statusOriginalView;
-
-@end
 
 @class SWStatusOriginalFrame;
 @interface SWStatusOriginalView : UIImageView
 @property (nonatomic, strong) SWStatusOriginalFrame *originalFrame;
 
-@property (nonatomic, weak) id<SWStatusOriginalViewDelegate> delegate;
 
 @end

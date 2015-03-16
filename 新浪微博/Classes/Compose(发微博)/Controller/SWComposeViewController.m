@@ -7,7 +7,7 @@
 //
 
 #import "SWComposeViewController.h"
-#import "SWTextView.h"
+#import "SWEmotionTextView.h"
 #import "SWComposeToolbar.h"
 #import "SWComposePhotosView.h"
 #import "SWStatusTool.h"
@@ -16,8 +16,9 @@
 #import "SWAccount.h"
 #import "SWSendStatusResult.h"
 #import "SWEmotionKeyboard.h"
+#import "SWEmotion.h"
 @interface SWComposeViewController ()<SWComposeToolbarDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-@property (nonatomic, weak) SWTextView *textView;
+@property (nonatomic, weak) SWEmotionTextView *textView;
 @property (nonatomic, weak) SWComposeToolbar *toolbar;
 @property (nonatomic, weak) SWComposePhotosView *photosView;
 @property (nonatomic, strong) SWEmotionKeyboard *kerboard;
@@ -42,6 +43,27 @@
 
 - (void) setupNavigationItem
 {
+    NSString *name = [SWAccountTool account].userName;
+    if (name) {
+        // 构建文字
+        NSString *prefix = @"发微博";
+        NSString *text = [NSString stringWithFormat:@"%@\n%@", prefix, name];
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+        [string addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:[text rangeOfString:prefix]];
+        [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:[text rangeOfString:name]];
+        
+        // 创建label
+        UILabel *titleLabel = [[UILabel alloc] init];
+        titleLabel.attributedText = string;
+        titleLabel.numberOfLines = 0;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.width = 100;
+        titleLabel.height = 44;
+        self.navigationItem.titleView = titleLabel;
+    } else {
+        self.title = @"发微博";
+    }
+    
     self.title = @"发微博";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
@@ -64,6 +86,13 @@
     
     // 添加显示图片的相册控件
     [self setupPhotosView];
+    
+    //监听表情按钮选择的通知
+    // 监听表情选中的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:SWEmotionDidSelectedNotification object:nil];
+    // 监听删除按钮点击的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidDeleted:) name:SWEmotionDidDeletedNotification object:nil];
+    
     
 }
 
@@ -100,7 +129,7 @@
     
     // 1封装请求参数
     SWSendStatusParam *params = [SWSendStatusParam param];
-    params.status = self.textView.text;
+    params.status = self.textView.realText;
     
   
     // 2.发表微博
@@ -123,7 +152,7 @@
 {
     // 1.封装请求参数
     SWSendStatusParam *params = [SWSendStatusParam param];
-    params.status = self.textView.text;
+    params.status = self.textView.realText;
     
     // 2.发表微博
     [SWStatusTool sendStatusWithParam:params success:^(SWSendStatusResult *result) {
@@ -162,7 +191,7 @@
 - (void)setupTextView
 {
     // 1.创建输入控件
-    SWTextView *textView = [[SWTextView alloc] init];
+    SWEmotionTextView *textView = [[SWEmotionTextView alloc] init];
     textView.alwaysBounceVertical = YES; // 垂直方向上拥有有弹簧效果
     textView.frame = self.view.bounds;
     textView.delegate = self;
@@ -181,6 +210,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     // 键盘即将隐藏, 就会发出UIKeyboardWillHideNotification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     
 }
 
@@ -326,6 +356,8 @@
     
     // 关闭键盘
     [self.textView resignFirstResponder];
+    // 关闭键盘只后，changKeyboard 为no
+    self.changingKeyboard = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 打开键盘
         [self.textView becomeFirstResponder];
@@ -352,6 +384,32 @@
  */
 - (void)textViewDidChange:(UITextView *)textView
 {
-    self.navigationItem.rightBarButtonItem.enabled = self.textView.text.length!=0;
+    self.navigationItem.rightBarButtonItem.enabled = textView.hasText;;
+    
+}
+
+/**
+ *  当表情选中的时候调用
+ *
+ *  @param note 里面包含了选中的表情
+ */
+- (void)emotionDidSelected:(NSNotification *)note
+{
+    SWEmotion *emotion = note.userInfo[SWSelectedEmotion];
+    
+    // 1.拼接表情
+    [self.textView appendEmotion:emotion];
+    
+    // 2.检测文字长度
+    [self textViewDidChange:self.textView];
+}
+
+/**
+ *  当点击表情键盘上的删除按钮时调用
+ */
+- (void)emotionDidDeleted:(NSNotification *)note
+{
+    // 往回删
+    [self.textView deleteBackward];
 }
 @end

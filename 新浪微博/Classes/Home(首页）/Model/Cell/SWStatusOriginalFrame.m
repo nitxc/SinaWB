@@ -41,7 +41,7 @@
     CGFloat textY = CGRectGetMaxY(self.iconFrame) + SWStatusCellInset;
     CGFloat maxW = SWScreenWidth - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
-    CGSize textSize = [status.text sizeWithFont:SWStatusOriginalTextFont maxSize:maxSize];
+    CGSize textSize = [status.attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
     // 4.更多图标计算

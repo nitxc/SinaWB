@@ -10,7 +10,7 @@
 @class SWEmotionToolbar;
 
 typedef enum {
-    SWEmotionTypeRecent, // 最近
+    SWEmotionTypeRecent =1, // 最近
     SWEmotionTypeDefault, // 默认
     SWEmotionTypeEmoji, // Emoji
     SWEmotionTypeLxh // 浪小花
@@ -23,5 +23,6 @@ typedef enum {
 @end
 
 @interface SWEmotionToolbar : UIView
+@property (nonatomic,assign)SWEmotionType currentButtonType;
 @property (nonatomic, weak) id<SWEmotionToolbarDelegate> delegate;
 @end

@@ -13,11 +13,13 @@
 #import "UIImageView+WebCache.h"
 #import "SWStatusUserHeadView.h"
 #import "SWStatusPhotosView.h"
+#import "SWStatusOriginalFrame.h"
+#import "SWStatusLable.h"
 @interface SWStatusOriginalView()
 /** 昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
 /** 正文 */
-@property (nonatomic, weak) UILabel *textLabel;
+@property (nonatomic, weak) SWStatusLable *textLabel;
 /** 来源 */
 @property (nonatomic, weak) UILabel *sourceLabel;
 /** 时间 */
@@ -31,6 +33,8 @@
 @property (nonatomic, weak) UIButton *moreBtn;
 /** 图片相册 */
 @property (nonatomic, weak) SWStatusPhotosView *photosView;
+
+
 @end
 @implementation SWStatusOriginalView
 
@@ -48,9 +52,8 @@
         self.nameLabel = nameLabel;
         
         // 2.正文（内容）
-        UILabel *textLabel = [[UILabel alloc] init];
-        textLabel.font = SWStatusOriginalTextFont;
-        textLabel.numberOfLines = 0;
+        SWStatusLable *textLabel = [[SWStatusLable alloc] init];
+       // textLabel.font = SWStatusOriginalTextFont;
         [self addSubview:textLabel];
         self.textLabel = textLabel;
         
@@ -121,7 +124,7 @@
     }
     
     // 2.正文（内容）
-    self.textLabel.text = status.text;
+    self.textLabel.attributedText = status.attributedText;
     self.textLabel.frame = originalFrame.textFrame;
     
    //warning 需要时刻根据现在的时间字符串来计算时间label的frame
@@ -164,11 +167,10 @@
  */
 - (void)moreBtnOnClick
 {
+    //利用通知发送更多按钮被点击：挣对于多层次需要传递数据
     
-    
-    if ([self.delegate respondsToSelector:@selector(statusOriginalViewDidClickedMoreButton:)]) {
-        [self.delegate statusOriginalViewDidClickedMoreButton:self];
-    }
+   [[NSNotificationCenter defaultCenter] postNotificationName:SWStatusOriginalDidMoreNotication object:nil];
+ 
     
 }
 @end

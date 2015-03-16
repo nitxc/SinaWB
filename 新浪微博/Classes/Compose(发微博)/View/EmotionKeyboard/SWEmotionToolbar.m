@@ -1,8 +1,8 @@
 //
 //  SWEmotionToolbar.m
-//  黑马微博
+//  新浪微博
 //
-//  Created by apple on 14-7-15.
+//  Created by apple on 15-4-15.
 //  Copyright (c) 2014年 heima. All rights reserved.
 //
 
@@ -26,6 +26,9 @@
         [self setupButton:@"默认" tag:SWEmotionTypeDefault];
         [self setupButton:@"Emoji" tag:SWEmotionTypeEmoji];
         [self setupButton:@"浪小花" tag:SWEmotionTypeLxh];
+        
+        // 2.监听表情选中的通知:为了重新刷新数据
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidSelected:) name:SWEmotionDidSelectedNotification object:nil];
     }
     return self;
 }
@@ -71,7 +74,7 @@
  */
 - (void)buttonClick:(UIButton *)button
 {
-    // 1.控制按钮状态
+    // 1.控制按钮状态（selectedButton为上一次点击按钮，可能为空）
     self.selectedButton.selected = NO;
     button.selected = YES;
     self.selectedButton = button;
@@ -86,10 +89,10 @@
 {
     _delegate = delegate;
     
-    // 获得“默认”按钮
-    UIButton *defaultButton = (UIButton *)[self viewWithTag:SWEmotionTypeDefault];
-    // 默认选中“默认”按钮
-    [self buttonClick:defaultButton];
+    // 获得“默认”按钮 或者“当前”
+    UIButton *currentButton = (UIButton *)[self viewWithTag:_currentButtonType];
+    // 默认选中“默认”按钮 或者“当前”
+    [self buttonClick:currentButton];
 }
 
 - (void)layoutSubviews
@@ -106,5 +109,13 @@
         button.x = i * buttonW;
     }
 }
-
+/**
+ *  表情选中
+ */
+- (void)emotionDidSelected:(NSNotification *)note
+{
+    if (self.selectedButton.tag == SWEmotionTypeRecent) {
+        [self buttonClick:self.selectedButton];
+    }
+}
 @end

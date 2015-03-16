@@ -14,6 +14,8 @@
 #import "SWStatusDetailFrame.h"
 @interface SWStatusDetailView()
 @property (nonatomic, weak) SWStatusRetweetedView *retweetedView;
+@property (nonatomic, weak) SWStatusOriginalView *originalView;
+
 @end
 
 @implementation SWStatusDetailView

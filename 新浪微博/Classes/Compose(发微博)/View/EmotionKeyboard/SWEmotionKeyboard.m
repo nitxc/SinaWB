@@ -9,51 +9,18 @@
 #import "SWEmotionKeyboard.h"
 #import "SWEmotionListView.h"
 #import "SWEmotionToolbar.h"
-#import "MJExtension.h"
 #import "SWEmotion.h"
-
+#import "SWEmotionTool.h"
 @interface SWEmotionKeyboard() <SWEmotionToolbarDelegate>
 /** 表情列表 */
 @property (nonatomic, weak) SWEmotionListView *listView;
 /** 表情工具条 */
 @property (nonatomic, weak) SWEmotionToolbar *toollbar;
 
-/** 默认表情 */
-@property (nonatomic, strong) NSArray *defaultEmotions;
-/** emoji表情 */
-@property (nonatomic, strong) NSArray *emojiEmotions;
-/** 浪小花表情 */
-@property (nonatomic, strong) NSArray *lxhEmotions;
 @end
 
 @implementation SWEmotionKeyboard
 
-- (NSArray *)defaultEmotions
-{
-    if (!_defaultEmotions) {
-        NSString *plist = [[NSBundle mainBundle] pathForResource:@"Emoticons/default/info.plist" ofType:nil];
-        self.defaultEmotions = [SWEmotion objectArrayWithFile:plist];
-    }
-    return _defaultEmotions;
-}
-
-- (NSArray *)emojiEmotions
-{
-    if (!_emojiEmotions) {
-        NSString *plist = [[NSBundle mainBundle] pathForResource:@"Emoticons/emoji/info.plist" ofType:nil];
-        self.emojiEmotions = [SWEmotion objectArrayWithFile:plist];
-    }
-    return _emojiEmotions;
-}
-
-- (NSArray *)lxhEmotions
-{
-    if (!_lxhEmotions) {
-        NSString *plist = [[NSBundle mainBundle] pathForResource:@"Emoticons/lxh/info.plist" ofType:nil];
-        self.lxhEmotions = [SWEmotion objectArrayWithFile:plist];
-    }
-    return _lxhEmotions;
-}
 
 + (instancetype)keyboard
 {
@@ -73,7 +40,8 @@
         
         // 2.添加表情工具条
         SWEmotionToolbar *toollbar = [[SWEmotionToolbar alloc] init];
-        toollbar.delegate = self;
+        toollbar.currentButtonType = [SWEmotionTool recentEmotions].count>0?SWEmotionTypeRecent:SWEmotionTypeDefault;
+        toollbar.delegate = self;//设置代理：并默认选择默认表情：但是需要判断最近使用的有无
         [self addSubview:toollbar];
         self.toollbar = toollbar;
     }
@@ -99,21 +67,24 @@
 {
     switch (emotionType) {
         case SWEmotionTypeDefault:// 默认
-            self.listView.emotions = self.defaultEmotions;
+            //传递默认表情模型数据
+            self.listView.emotions = [SWEmotionTool defaultEmotions];
             break;
             
         case SWEmotionTypeEmoji: // Emoji
-            self.listView.emotions = self.emojiEmotions;
+             //传递Emoji表情模型数据
+            self.listView.emotions = [SWEmotionTool emojiEmotions];
             break;
             
         case SWEmotionTypeLxh: // 浪小花
-            self.listView.emotions = self.lxhEmotions;
+             //传递浪小花表情模型数据
+            self.listView.emotions = [SWEmotionTool lxhEmotions];
             break;
-            
+        case SWEmotionTypeRecent://最近
+            self.listView.emotions = [SWEmotionTool recentEmotions];
         default:
             break;
     }
-    
-    SWLog(@"%lu %@", (unsigned long)self.listView.emotions.count, [self.listView.emotions firstObject]);
+
 }
 @end

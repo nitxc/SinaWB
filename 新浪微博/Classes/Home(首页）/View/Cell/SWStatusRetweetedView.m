@@ -9,13 +9,12 @@
 #import "SWStatusRetweetedView.h"
 #import "SWStatusRetweetedFrame.h"
 #import "SWStatus.h"
-#import "SWUser.h"
 #import "SWStatusPhotosView.h"
+#import "SWStatusLable.h"
 @interface SWStatusRetweetedView()
-/**  昵称 */
-@property (nonatomic, weak) UILabel *nameLabel;
+
 /** 正文 */
-@property (nonatomic, weak) UILabel *textLabel;
+@property (nonatomic, weak) SWStatusLable *textLabel;
 /** 配图相册 */
 @property (nonatomic, weak) SWStatusPhotosView *photosView;
 @end
@@ -30,17 +29,15 @@
         self.image = [UIImage resizableImageWithName:@"timeline_retweet_background"];
         
         // 1.昵称
-        UILabel *nameLabel = [[UILabel alloc] init];
-        nameLabel.textColor = SWColor(80, 120, 170);
-        nameLabel.font = SWStatusRetweetedNameFont;
-        [self addSubview:nameLabel];
-        self.nameLabel = nameLabel;
+//        UILabel *nameLabel = [[UILabel alloc] init];
+//        nameLabel.textColor = SWColor(80, 120, 170);
+//        nameLabel.font = SWStatusRetweetedNameFont;
+//        [self addSubview:nameLabel];
+//        self.nameLabel = nameLabel;
         
         // 2.正文（内容）
-        UILabel *textLabel = [[UILabel alloc] init];
-        textLabel.textColor = SWColor(129, 129, 129);
-        textLabel.font = SWStatusRetweetedTextFont;
-        textLabel.numberOfLines = 0;
+        SWStatusLable *textLabel = [[SWStatusLable alloc] init];
+        //textLabel.textColor = SWColor(129, 129, 129);
         [self addSubview:textLabel];
         self.textLabel = textLabel;
         // 3.配图相册
@@ -56,12 +53,12 @@
     // 取出微博数据
     SWStatus *retweetedStatus = retweetedFrame.retweetedStatus;
     // 取出用户数据
-    SWUser *user = retweetedStatus.user;
+//    SWUser *user = retweetedStatus.user;
     //1.设置昵称的frame
-    self.nameLabel.text = [NSString stringWithFormat:@"@%@",user.name];
-    self.nameLabel.frame = retweetedFrame.nameFrame;
+//    self.nameLabel.text = [NSString stringWithFormat:@"@%@",user.name];
+//    self.nameLabel.frame = retweetedFrame.nameFrame;
     //2.设置转发正文的内容和frame
-    self.textLabel.text = retweetedStatus.text;
+    self.textLabel.attributedText = retweetedStatus.attributedText;
     self.textLabel.frame = retweetedFrame.textFrame;
     // 3.配图相册
     if (retweetedStatus.pic_urls.count) { // 有配图
