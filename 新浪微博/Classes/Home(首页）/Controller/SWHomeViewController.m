@@ -31,7 +31,7 @@
 #import "SWStatusCell.h"
 #import "SWStatusOriginalView.h"
 #import "SWStatusDetailView.h"
-@interface SWHomeViewController ()<SWStatusOriginalViewDelegate,UIActionSheetDelegate>
+@interface SWHomeViewController ()<UIActionSheetDelegate>
 /**
  *  微博数组(存放着所有的微博数据)
  */
@@ -113,9 +113,33 @@
     //3 集成刷新控件
     [self setupRefresh];
     
-    self.tableView.backgroundColor = SWColor(239, 239, 239);
+    self.tableView.backgroundColor = SWGobleTableViewBackgroundColor;
+    //4. 监听更多按钮被点击通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusOriginalViewDidClickedMoreButton:) name:SWStatusOriginalDidMoreNotication object:nil];
+    
+    //5. 监听文本链接
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(linkDidSelected:) name:SWLinkDidSelectedNotification object:nil];
+    //5. 普通文本链接
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusNormalTextDidSelected:) name:SWStatusNormalTextDidSelectedNotification object:nil];
 
   
+}
+- (void)statusNormalTextDidSelected:(NSNotification *) notification
+{
+    SWLog(@"---跳转cell：到微博正文----");
+    UIViewController *newVc = [[UIViewController alloc] init];
+    newVc.view.backgroundColor = [UIColor redColor];
+    newVc.title = @"微博正文";
+    [self.navigationController pushViewController:newVc animated:YES];
+}
+- (void)linkDidSelected:(NSNotification *) notification
+{
+    SWLog(@"文本属性：%@",notification.userInfo[SWLinkAttr]);
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 /**
  *  集成刷新控件
@@ -374,8 +398,6 @@
     //2.传递模型frame数据
     cell.statusFrame = _statusesFrame[indexPath.row];
     
-    cell.detailView.originalView.delegate = self;
-
     
     return cell;
 
@@ -436,7 +458,7 @@
  *
  *  @param statusOriginalView
  */
-- (void)statusOriginalViewDidClickedMoreButton:(SWStatusOriginalView *)statusOriginalView
+- (void)statusOriginalViewDidClickedMoreButton:(NSNotification *)notification
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报",@"屏蔽",@"取消关注",@"收藏", nil];
     [sheet showInView:self.view];

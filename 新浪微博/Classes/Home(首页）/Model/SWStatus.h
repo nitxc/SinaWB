@@ -19,7 +19,8 @@
 
 /** 	string 	微博信息内容*/
 @property (nonatomic, copy) NSString *text;
-
+/** 	string 	微博信息富文本内容*/
+@property (nonatomic, copy) NSAttributedString *attributedText;
 /** 	string 	微博来源*/
 @property (nonatomic, copy) NSString *source;
 
@@ -40,6 +41,6 @@
 
 /** 	 object 	微博配图地址。多图时返回多图链接。无配图返回“[]”  数组里面都是SWPhoto模型*/
 @property (nonatomic, strong) NSArray *pic_urls;
-
-
+/**      boolean    是否有转发微博 */
+@property (nonatomic, getter=isRetweeted) bool retweeded;
 @end
