@@ -14,24 +14,13 @@
 #import "SWCommonArrowItem.h"
 #import "SWCommonSwitchItem.h"
 #import "SWCommonLabelItem.h"
+#import "SWOneViewController.h"
 @interface SWDiscoverViewController ()
-@property (nonatomic, strong) NSMutableArray *groups;
 
 @end
 
 @implementation SWDiscoverViewController
-- (NSMutableArray *)groups
-{
-    if (_groups == nil) {
-        self.groups = [NSMutableArray array];
-    }
-    return _groups;
-}
-/** 屏蔽tableView的样式 */
-- (id)init
-{
-    return [self initWithStyle:UITableViewStyleGrouped];
-}
+
 
 
 - (void)setupSearchBar
@@ -48,13 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSearchBar];
-    // 设置tableView属性
-    self.tableView.backgroundColor = SWGobleTableViewBackgroundColor;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.sectionFooterHeight = 0;
-    self.tableView.sectionHeaderHeight = SWStatusCellMargin;
-    self.tableView.contentInset = UIEdgeInsetsMake(SWStatusCellMargin - 35, 0, 0, 0);
-    
+  
     // 初始化模型数据
     [self setupGroups];
   
@@ -98,13 +81,14 @@
     
     // 2.设置组的所有行数据:根据不同cell下那是不同内容
     SWCommonItem *gameCenter = [SWCommonItem itemWithTitle:@"游戏中心" icon:@"game_center"];
-    
+    gameCenter.destVcClass = [SWOneViewController class];
+
     SWCommonLabelItem *near = [SWCommonLabelItem itemWithTitle:@"周边" icon:@"near"];
     near.text = @"测试文字";
-    
+    near.destVcClass = [SWOneViewController class];
     SWCommonSwitchItem *app = [SWCommonSwitchItem itemWithTitle:@"应用" icon:@"app"];
     app.badgeValue = @"10";
-    
+    app.destVcClass = [SWOneViewController class];
     group.items = @[gameCenter, near, app];
 }
 
@@ -116,9 +100,19 @@
     
     // 2.设置组的所有行数据
     SWCommonSwitchItem *video = [SWCommonSwitchItem itemWithTitle:@"视频" icon:@"video"];
+    video.operation = ^{
+        SWLog(@"----点击了视频---");
+    };
     SWCommonSwitchItem *music = [SWCommonSwitchItem itemWithTitle:@"音乐" icon:@"music"];
+   
     SWCommonItem *movie = [SWCommonItem itemWithTitle:@"电影" icon:@"movie"];
+    movie.operation = ^{
+        SWLog(@"----点击了电影");
+    };
     SWCommonLabelItem *cast = [SWCommonLabelItem itemWithTitle:@"播客" icon:@"cast"];
+    cast.operation = ^{
+        SWLog(@"----点击了播客");
+    };
     cast.badgeValue = @"5";
     cast.subtitle = @"(10)";
     cast.text = @"axxxx";
@@ -127,47 +121,5 @@
     
     group.items = @[video, music, movie, cast, more];
 }
-
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.groups.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    SWCommonGroup *group = self.groups[section];
-    return group.items.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SWCommonCell *cell = [SWCommonCell cellWithTableView:tableView];
-    SWCommonGroup *group = self.groups[indexPath.section];
-    cell.item = group.items[indexPath.row];
-    // 设置cell所处的行号 和 所处组的总行数
-    [cell setIndexPath:indexPath rowsInSection:(int)group.items.count];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SWProfileViewController : UITableViewController
+#import "SWCommonTableViewController.h"
+@interface SWProfileViewController : SWCommonTableViewController
 
 @end

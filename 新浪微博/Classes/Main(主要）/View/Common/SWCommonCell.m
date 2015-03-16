@@ -95,6 +95,7 @@
         // 设置背景view
         self.backgroundView = [[UIImageView alloc] init];
         self.selectedBackgroundView = [[UIImageView alloc] init];
+        
     }
     return self;
 }
@@ -114,10 +115,10 @@
     UIImageView *bgView = (UIImageView *)self.backgroundView;
     UIImageView *selectedBgView = (UIImageView *)self.selectedBackgroundView;
     
-    // 2.设置背景图片
+  
     if (rows == 1) {
         bgView.image = [UIImage resizableImageWithName:@"common_card_background"];
-        selectedBgView.image = [UIImage resizableImageWithName:@"common_card_background_highlighted"];
+        selectedBgView.image = [UIImage resizableImageWithName:@"common_card_top_background_highlighted"];
     } else if (indexPath.row == 0) { // 首行
         bgView.image = [UIImage resizableImageWithName:@"common_card_top_background"];
         selectedBgView.image = [UIImage resizableImageWithName:@"common_card_top_background_highlighted"];
