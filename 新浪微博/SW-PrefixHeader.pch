@@ -89,9 +89,22 @@
 // 富文本链接属性标志
 #define SWLinkAttr @"SWLinkAttr"
 // 富文本链接通知
-#define SWLinkDidSelectedNotification @"SWLinkDidSelectedNotification"
+#define SWStatusLinkDidSelectedNotification @"SWStatusLinkDidSelectedNotification"
 // 转发微博的字体颜色
 #define SWStatusRetweededTextColor SWColor(111, 111, 111)
 // 普通文本通知
 #define SWStatusNormalTextDidSelectedNotification @"SWStatusNormalTextDidSelectedNotification"
+
+//评论、转发相关参数
+#define SWCommentCellInset 5
+#define SWCommentUserNameFont [UIFont systemFontOfSize:11]
+#define SWCommentTextMargin 5
+#define SWCommentLinkDidSelectedNotification @"SWCommentLinkDidSelectedNotification"
+//评论普通文本通知
+#define SWCommentNormalTextDidSelectedNotification @"SWCommentNormalTextDidSelectedNotification"
+//评论时间字体颜色
+
+#define SWCommentTimeFont [UIFont systemFontOfSize:9]
+#define SWCommentTimeColor SWColor(152, 152, 152)
+#define SWCommentRichTextFont [UIFont systemFontOfSize:12]
 #endif

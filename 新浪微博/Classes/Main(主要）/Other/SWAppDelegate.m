@@ -89,7 +89,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    UIBackgroundTaskIdentifier taskID = [application beginBackgroundTaskWithExpirationHandler:^{
+    __block UIBackgroundTaskIdentifier taskID = [application beginBackgroundTaskWithExpirationHandler:^{
         [application endBackgroundTask:taskID];
     }];
     

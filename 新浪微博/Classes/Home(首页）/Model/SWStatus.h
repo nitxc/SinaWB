@@ -43,4 +43,6 @@
 @property (nonatomic, strong) NSArray *pic_urls;
 /**      boolean    是否有转发微博 */
 @property (nonatomic, getter=isRetweeted) bool retweeded;
+/** 是否为详细正文视图微博 */
+@property (nonatomic, assign, getter=isDetailContent) bool detailContent;
 @end

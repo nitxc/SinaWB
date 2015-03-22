@@ -23,5 +23,4 @@
 @property (nonatomic, strong) SWStatusOriginalFrame *originalFrame;
 
 
-
 @end

@@ -45,13 +45,25 @@
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
     // 4.更多图标计算
-    UIImage *moreImage = [UIImage imageNamed:@"timeline_icon_more"];
-    CGFloat moreW = moreImage.size.width;
-
-    CGFloat moreX = SWScreenWidth-SWStatusCellInset - moreW;
-    CGFloat moreY = iconY;
-    CGFloat moreH = moreImage.size.height;
-    self.moreFrame = CGRectMake(moreX, moreY, moreW, moreH);
+    if(status.detailContent){
+        UIImage *collectImage = [UIImage imageNamed:@"timeline_icon_more"];
+        CGFloat collectW = collectImage.size.width;
+        
+        CGFloat collectX = SWScreenWidth-SWStatusCellInset - collectW;
+        CGFloat collectY = iconY;
+        CGFloat collectH = collectImage.size.height;
+        self.collectFrame = CGRectMake(collectX, collectY, collectW, collectH);
+    }else{
+        UIImage *moreImage = [UIImage imageNamed:@"timeline_icon_more"];
+        CGFloat moreW = moreImage.size.width;
+        
+        CGFloat moreX = SWScreenWidth-SWStatusCellInset - moreW;
+        CGFloat moreY = iconY;
+        CGFloat moreH = moreImage.size.height;
+        self.moreFrame = CGRectMake(moreX, moreY, moreW, moreH);
+        
+    }
+  
     
     // 5.配图相册
     CGFloat h = 0;

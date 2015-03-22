@@ -31,6 +31,8 @@
 #import "SWStatusCell.h"
 #import "SWStatusOriginalView.h"
 #import "SWStatusDetailView.h"
+#import "SWStatusDetailViewController.h"
+#import "MJRefresh.h"
 @interface SWHomeViewController ()<UIActionSheetDelegate>
 /**
  *  微博数组(存放着所有的微博数据)
@@ -118,7 +120,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusOriginalViewDidClickedMoreButton:) name:SWStatusOriginalDidMoreNotication object:nil];
     
     //5. 监听文本链接
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(linkDidSelected:) name:SWLinkDidSelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(linkDidSelected:) name:SWStatusLinkDidSelectedNotification object:nil];
     //5. 普通文本链接
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusNormalTextDidSelected:) name:SWStatusNormalTextDidSelectedNotification object:nil];
 
@@ -127,9 +129,8 @@
 - (void)statusNormalTextDidSelected:(NSNotification *) notification
 {
     SWLog(@"---跳转cell：到微博正文----");
-    UIViewController *newVc = [[UIViewController alloc] init];
-    newVc.view.backgroundColor = [UIColor redColor];
-    newVc.title = @"微博正文";
+    SWStatusDetailViewController *newVc = [[SWStatusDetailViewController alloc] init];
+    
     [self.navigationController pushViewController:newVc animated:YES];
 }
 - (void)linkDidSelected:(NSNotification *) notification
@@ -147,34 +148,40 @@
 - (void)setupRefresh
 {
     // 1.添加下拉刷新控件
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [self.tableView addSubview:refreshControl];
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    [self.tableView addSubview:refreshControl];
+//    
+//    // 2.监听状态
+//    [refreshControl addTarget:self action:@selector(refreshControlStateChange:) forControlEvents:UIControlEventValueChanged];
+//    
+//    // 3.让刷新控件自动进入刷新状态
+//    [refreshControl beginRefreshing];
+//    
+//    // 4.加载数据
+//    [self refreshControlStateChange:refreshControl];
+//    
+//    // 5.添加上拉加载更多控件
+//    SWLoadMoreFooter *footer = [SWLoadMoreFooter footer];
+//    self.tableView.tableFooterView = footer;
+//    self.footer = footer;
+    [self.tableView addHeaderWithTarget:self action:@selector(loadNewStatuses)];
+    [self.tableView addFooterWithTarget:self action:@selector(loadMoreStatuses)];
     
-    // 2.监听状态
-    [refreshControl addTarget:self action:@selector(refreshControlStateChange:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView headerBeginRefreshing];
+
     
-    // 3.让刷新控件自动进入刷新状态
-    [refreshControl beginRefreshing];
-    
-    // 4.加载数据
-    [self refreshControlStateChange:refreshControl];
-    
-    // 5.添加上拉加载更多控件
-    SWLoadMoreFooter *footer = [SWLoadMoreFooter footer];
-    self.tableView.tableFooterView = footer;
-    self.footer = footer;
     
 }
 /**
  *  当下拉刷新控件进入刷新状态（转圈圈）的时候会自动调用
  */
-- (void) refreshControlStateChange:(UIRefreshControl *)refreshControl
-{
-   
-    [self loadNewStatuses:refreshControl];
-   
-    
-}
+//- (void) refreshControlStateChange:(UIRefreshControl *)refreshControl
+//{
+//   
+//    [self loadNewStatuses:refreshControl];
+//   
+//    
+//}
 /**
  *  根据微博模型数组 转成 微博frame模型数据
  *
@@ -197,7 +204,7 @@
 /**
  *  加载最新的微博数据
  */
-- (void)loadNewStatuses:(UIRefreshControl *)refreshControl
+- (void)loadNewStatuses
 {
     
     // 1.封装请求参数
@@ -222,7 +229,7 @@
         // 重新刷新表格
         [self.tableView reloadData];
         // 让刷新控件停止刷新（恢复默认的状态）
-        [refreshControl endRefreshing];
+        [self.tableView headerEndRefreshing];
         
         // 提示用户最新的微博数量
         [self showNewStatusesCount:(int)newFrames.count];
@@ -265,10 +272,13 @@
         
         // 重新刷新表格
         [self.tableView reloadData];
+        // 让刷新控件停止刷新（恢复默认的状态）
+        [self.tableView footerEndRefreshing];
+
     } failure:^(NSError *error) {
         SWLog(@"请求失败--%@", error);
         // 让刷新控件停止刷新（恢复默认的状态）
-        [self.footer endRefreshing];
+        [self.tableView footerEndRefreshing];
     }];
 }
 
@@ -420,31 +430,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *newVc = [[UIViewController alloc] init];
-    newVc.view.backgroundColor = [UIColor redColor];
-    newVc.title = @"新控制器";
+    SWStatusDetailViewController *newVc = [[SWStatusDetailViewController alloc] init];
+    SWStatusFrame *statusFrame = self.statusesFrame[indexPath.row];
+    newVc.status = statusFrame.status;
     [self.navigationController pushViewController:newVc animated:YES];
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (self.statusesFrame.count <= 0 || self.footer.isRefreshing) return;
-    
-    // 1.差距
-    CGFloat delta = scrollView.contentSize.height - scrollView.contentOffset.y;
-    // 刚好能完整看到footer的高度
-    CGFloat sawFooterH = self.view.height - self.tabBarController.tabBar.height;
-    
-    // 2.如果能看见整个footer
-    if (delta <= (sawFooterH - 0)) {
-        // 进入上拉刷新状态
-        [self.footer beginRefreshing];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 加载更多的微博数据
-            [self loadMoreStatuses];
-        });
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (self.statusesFrame.count <= 0 || self.footer.isRefreshing) return;
+//    
+//    // 1.差距
+//    CGFloat delta = scrollView.contentSize.height - scrollView.contentOffset.y;
+//    // 刚好能完整看到footer的高度
+//    CGFloat sawFooterH = self.view.height - self.tabBarController.tabBar.height;
+//    
+//    // 2.如果能看见整个footer
+//    if (delta <= (sawFooterH - 0)) {
+//        // 进入上拉刷新状态
+//        [self.footer beginRefreshing];
+//        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            // 加载更多的微博数据
+//            [self loadMoreStatuses];
+//        });
+//    }
+//}
 - (void)pop
 {
     SWLog(@"--扫一扫--");

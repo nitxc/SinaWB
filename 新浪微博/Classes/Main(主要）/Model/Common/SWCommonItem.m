@@ -15,6 +15,7 @@
     SWCommonItem *item = [[self alloc] init];
     item.title = title;
     item.icon = icon;
+    
     return item;
 }
 

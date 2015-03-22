@@ -19,5 +19,7 @@
 @property (nonatomic, assign) CGRect photosFrame;
 /** 自己的frame */
 @property (nonatomic, assign) CGRect frame;
+/** 工具条frame */
+@property (nonatomic, assign) CGRect toolbarFrame;
 
 @end

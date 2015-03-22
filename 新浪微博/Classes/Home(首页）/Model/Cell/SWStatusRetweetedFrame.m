@@ -17,22 +17,22 @@
     _retweetedStatus = retweetedStatus;
     
     // 1.昵称
-//    CGFloat nameX = SWStatusCellInset;
-//    CGFloat nameY = SWStatusCellInset * 0.5;
-//    NSString *name = [NSString stringWithFormat:@"@%@", retweetedStatus.user.name];
-//    CGSize nameSize = [name sizeWithFont:SWStatusRetweetedNameFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
-//    self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
+    //    CGFloat nameX = SWStatusCellInset;
+    //    CGFloat nameY = SWStatusCellInset * 0.5;
+    //    NSString *name = [NSString stringWithFormat:@"@%@", retweetedStatus.user.name];
+    //    CGSize nameSize = [name sizeWithFont:SWStatusRetweetedNameFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+    //    self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
     
-    // 2.正文
+    // 1.正文
     CGFloat textX = SWStatusCellInset;
     CGFloat textY = SWStatusCellInset * 0.5;
     CGFloat maxW = SWScreenWidth - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
     CGSize textSize = [retweetedStatus.attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
-    // 5.配图相册
+    // 2.配图相册
     CGFloat h = 0;
-   
+    CGFloat toolbarY = 0;
     if (retweetedStatus.pic_urls.count) {
         CGFloat photosX = textX;
         CGFloat photosY = CGRectGetMaxY(self.textFrame) + SWStatusCellInset;
@@ -40,11 +40,24 @@
         self.photosFrame = (CGRect){{photosX, photosY}, photosSize};
         
         h = CGRectGetMaxY(self.photosFrame) + SWStatusCellInset;
+        
+        toolbarY =  CGRectGetMaxY(self.photosFrame) + SWStatusCellInset;
     } else {
+        
         h = CGRectGetMaxY(self.textFrame) + SWStatusCellInset;
+        toolbarY =  CGRectGetMaxY(self.textFrame) + SWStatusCellInset;
     }
-
     
+    // 3.设置工具条的frame（判断是否需要显示）
+    if(retweetedStatus.detailContent){//需要显示工具条
+        
+        
+        CGFloat toolbarW = 200;
+        CGFloat toolbarX = SWScreenWidth - toolbarW;
+        CGFloat toolbarH = 20;
+        self.toolbarFrame = CGRectMake(toolbarX, toolbarY, toolbarW, toolbarH);
+        h = CGRectGetMaxY(self.toolbarFrame) + SWStatusCellInset;
+    }
     
     // 自己
     CGFloat x = 0;

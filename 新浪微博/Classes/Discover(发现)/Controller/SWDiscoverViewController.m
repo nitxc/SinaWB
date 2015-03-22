@@ -15,23 +15,10 @@
 #import "SWCommonSwitchItem.h"
 #import "SWCommonLabelItem.h"
 @interface SWDiscoverViewController ()
-@property (nonatomic, strong) NSMutableArray *groups;
 
 @end
 
 @implementation SWDiscoverViewController
-- (NSMutableArray *)groups
-{
-    if (_groups == nil) {
-        self.groups = [NSMutableArray array];
-    }
-    return _groups;
-}
-/** 屏蔽tableView的样式 */
-- (id)init
-{
-    return [self initWithStyle:UITableViewStyleGrouped];
-}
 
 
 - (void)setupSearchBar
@@ -48,12 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSearchBar];
-    // 设置tableView属性
-    self.tableView.backgroundColor = SWGobleTableViewBackgroundColor;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.sectionFooterHeight = 0;
-    self.tableView.sectionHeaderHeight = SWStatusCellMargin;
-    self.tableView.contentInset = UIEdgeInsetsMake(SWStatusCellMargin - 35, 0, 0, 0);
     
     // 初始化模型数据
     [self setupGroups];
@@ -124,50 +105,11 @@
     cast.text = @"axxxx";
     SWCommonArrowItem *more = [SWCommonArrowItem itemWithTitle:@"更多" icon:@"more"];
     //    more.badgeValue = @"998";
+    more.operation = ^{
+        SWLog(@"--更多--");
+    };
     
     group.items = @[video, music, movie, cast, more];
 }
-
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.groups.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    SWCommonGroup *group = self.groups[section];
-    return group.items.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SWCommonCell *cell = [SWCommonCell cellWithTableView:tableView];
-    SWCommonGroup *group = self.groups[indexPath.section];
-    cell.item = group.items[indexPath.row];
-    // 设置cell所处的行号 和 所处组的总行数
-    [cell setIndexPath:indexPath rowsInSection:(int)group.items.count];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

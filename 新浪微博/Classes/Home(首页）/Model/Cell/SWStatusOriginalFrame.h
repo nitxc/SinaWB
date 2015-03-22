@@ -19,6 +19,8 @@
 @property (nonatomic, assign) CGRect vipFrame;
 /** 更多图标 */
 @property (nonatomic, assign) CGRect moreFrame;
+/** 收藏图标 */
+@property (nonatomic, assign) CGRect collectFrame;
 /** 自己的frame */
 @property (nonatomic, assign) CGRect frame;
 /** 相册的frame */
